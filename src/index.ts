@@ -184,7 +184,7 @@ const tenPower = (): void => {
 
 // Uniminus
 const uniminus = (): void => {
-  if (inputValues[0] == "-") {
+  if (calculateValue[0] == "-") {
     inputValues.splice(0, 2);
     calculateValue.splice(0, 2);
     inputValues.pop();

@@ -22,7 +22,7 @@ const pushFucntion = (inputValue, calculateValu) => {
 };
 // Evaluate Value
 const evaluateFunv = () => {
-    let ans = calculateValue.join("");
+    let ans = inputValues.join("");
     let out = eval(ans);
     out = out != undefined ? out : "";
     display.value = out;
@@ -160,7 +160,7 @@ const tenPower = () => {
 };
 // Uniminus
 const uniminus = () => {
-    if (inputValues[0] == "-") {
+    if (calculateValue[0] == "-") {
         inputValues.splice(0, 2);
         calculateValue.splice(0, 2);
         inputValues.pop();
