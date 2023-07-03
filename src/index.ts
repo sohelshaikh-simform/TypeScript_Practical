@@ -3,17 +3,18 @@ type strnumArr = (string | number)[];
 
 let display: HTMLInputElement = document.querySelector("#screen")!;
 let btns: any = document.querySelectorAll(".btn");
-let memory: number|string;
+let memory: number | string;
 let btntxt: string;
 
 var inputValues: stringArr = [];
 var calculateValue: strnumArr = [];
 
-const displayValue=():void=> {
+// Display Equation
+const displayValue = (): void => {
   display.value = inputValues.join("");
-}
-
-const pushFucntion=(inputValue: string, calculateValu?: string):void =>{
+};
+// Push Fucntion to Make Array of Equation
+const pushFucntion = (inputValue: string, calculateValu?: string): void => {
   inputValues.push(inputValue);
   if (calculateValu) {
     calculateValue.push(calculateValu);
@@ -21,21 +22,21 @@ const pushFucntion=(inputValue: string, calculateValu?: string):void =>{
     calculateValue.push(inputValue);
   }
   displayValue();
-}
+};
 
-const evaluateFunv=() :string=>{
+// Evaluate Value
+const evaluateFunv = (): string => {
   let ans = calculateValue.join("");
   let out = eval(ans);
   out = out != undefined ? out : "";
   display.value = out;
   return out;
-}
+};
 
 for (let item of btns) {
   item.addEventListener("click", (e: any): void => {
     btntxt = e.target.innerText;
     switch (btntxt) {
-    
       // trigonometry Fucntion
       case "Sin":
         pushFucntion("sin(", "Math.sin(");
@@ -56,7 +57,7 @@ for (let item of btns) {
         pushFucntion("tanh(", "Math.tanh(");
         break;
 
-        // Arithmetic function
+      // Arithmetic function
       case "=":
         let out = evaluateFunv();
         out = out != undefined ? out : "";
@@ -79,7 +80,7 @@ for (let item of btns) {
         displayValue();
         break;
 
-        // Memory Fucntion
+      // Memory Fucntion
       case "MS":
         memory = evaluateFunv();
         display.value = "";
@@ -96,8 +97,8 @@ for (let item of btns) {
       case "M-":
         memory = Number(memory) - 1;
         break;
-      
-        // absolute Function
+
+      // absolute Function
       case "|x|":
         pushFucntion("abs(", "Math.abs(");
         break;
@@ -107,13 +108,17 @@ for (let item of btns) {
         pushFucntion("exp(", "Math.exp(");
         break;
 
+      case "mod":
+        pushFucntion("mod(", "%(");
+        break;
+
       //random number generator
       case "rand":
         let obj = Math.random() * 100;
         inputValues = [obj.toString()];
         calculateValue = [obj];
         break;
-        // logarithm
+      // logarithm
       case "log":
         pushFucntion("log(", "Math.log10(");
         break;
@@ -129,9 +134,9 @@ for (let item of btns) {
 
       // Factorail
       case "n!":
-        pushFucntion("fact(","fact(");
+        pushFucntion("fact(", "fact(");
         break;
-        
+
       default:
         pushFucntion(btntxt);
         break;
@@ -154,7 +159,7 @@ const dvd = (): void => {
   inputValues = [calculateValue] as unknown as stringArr;
 };
 
-const fact = (number:number ): number => {
+const fact = (number: number): number => {
   var f = 1;
   for (let i = 1; i <= number; i++) {
     f = f * i;
@@ -164,7 +169,7 @@ const fact = (number:number ): number => {
 
 // Squar Root
 const sqrt = (): void => {
-  pushFucntion("root(", "Math.sqrt(");
+  pushFucntion("sqrt(", "Math.sqrt(");
 };
 
 // Power
@@ -177,4 +182,17 @@ const tenPower = (): void => {
   pushFucntion("10^", "10**");
 };
 
-
+// Uniminus
+const uniminus = (): void => {
+  if (inputValues[0] == "-") {
+    inputValues.splice(0, 2);
+    calculateValue.splice(0, 2);
+    inputValues.pop();
+    calculateValue.pop();
+    displayValue();
+  } else {
+    inputValues = ["-", "(", ...inputValues, ")"];
+    calculateValue = ["-", "(", ...calculateValue, ")"];
+    displayValue();
+  }
+};

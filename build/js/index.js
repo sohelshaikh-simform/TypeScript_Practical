@@ -5,9 +5,11 @@ let memory;
 let btntxt;
 var inputValues = [];
 var calculateValue = [];
+// Display Equation
 const displayValue = () => {
     display.value = inputValues.join("");
 };
+// Push Fucntion to Make Array of Equation
 const pushFucntion = (inputValue, calculateValu) => {
     inputValues.push(inputValue);
     if (calculateValu) {
@@ -18,6 +20,7 @@ const pushFucntion = (inputValue, calculateValu) => {
     }
     displayValue();
 };
+// Evaluate Value
 const evaluateFunv = () => {
     let ans = calculateValue.join("");
     let out = eval(ans);
@@ -92,6 +95,9 @@ for (let item of btns) {
             case "exp":
                 pushFucntion("exp(", "Math.exp(");
                 break;
+            case "mod":
+                pushFucntion("mod(", "%(");
+                break;
             //random number generator
             case "rand":
                 let obj = Math.random() * 100;
@@ -142,7 +148,7 @@ const fact = (number) => {
 };
 // Squar Root
 const sqrt = () => {
-    pushFucntion("root(", "Math.sqrt(");
+    pushFucntion("sqrt(", "Math.sqrt(");
 };
 // Power
 const xPowy = () => {
@@ -151,4 +157,19 @@ const xPowy = () => {
 // Ten Power
 const tenPower = () => {
     pushFucntion("10^", "10**");
+};
+// Uniminus
+const uniminus = () => {
+    if (inputValues[0] == "-") {
+        inputValues.splice(0, 2);
+        calculateValue.splice(0, 2);
+        inputValues.pop();
+        calculateValue.pop();
+        displayValue();
+    }
+    else {
+        inputValues = ["-", "(", ...inputValues, ")"];
+        calculateValue = ["-", "(", ...calculateValue, ")"];
+        displayValue();
+    }
 };
