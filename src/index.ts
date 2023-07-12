@@ -6,8 +6,8 @@ let btns: any = document.querySelectorAll(".btn");
 let memory: number | string;
 let btntxt: string;
 
-var inputValues: stringArr = [];
-var calculateValue: strnumArr = [];
+let inputValues: stringArr = [];
+let calculateValue: strnumArr = [];
 
 // Display Equation
 const displayValue = (): void => {
@@ -147,6 +147,8 @@ for (let item of btns) {
 // back
 const dlt = (): void => {
   display.value = display.value.substr(0, display.value.length - 1);
+  inputValues.pop()
+  calculateValue.pop()
 };
 // Square
 const square = (): void => {

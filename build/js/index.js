@@ -3,8 +3,8 @@ let display = document.querySelector("#screen");
 let btns = document.querySelectorAll(".btn");
 let memory;
 let btntxt;
-var inputValues = [];
-var calculateValue = [];
+let inputValues = [];
+let calculateValue = [];
 // Display Equation
 const displayValue = () => {
     display.value = inputValues.join("");
@@ -22,7 +22,7 @@ const pushFucntion = (inputValue, calculateValu) => {
 };
 // Evaluate Value
 const evaluateFunv = () => {
-    let ans = inputValues.join("");
+    let ans = calculateValue.join("");
     let out = eval(ans);
     out = out != undefined ? out : "";
     display.value = out;
@@ -128,6 +128,8 @@ for (let item of btns) {
 // back
 const dlt = () => {
     display.value = display.value.substr(0, display.value.length - 1);
+    inputValues.pop();
+    calculateValue.pop();
 };
 // Square
 const square = () => {
